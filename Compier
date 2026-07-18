@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+</head>
+<body>
+    <h3>Python Compiler</h3>
+    <textarea id="code" rows="10" cols="50">print("Hello World")</textarea><br>
+    
+    <button id="run-btn">Run Code</button>
+    <div id="output" style="margin-top: 10px; border: 1px solid #ccc; padding: 10px;"></div>
+
+    <script type="py">
+        from pyscript import display, document
+
+        def run_code(event):
+            # 1. Get the code from the textarea
+            user_code = document.getElementById("code").value
+            
+            # 2. Clear previous output
+            output_div = document.getElementById("output")
+            output_div.innerHTML = ""
+            
+            # 3. Execute and capture output
+            try:
+                # Redirecting stdout to our output div
+                exec(user_code)
+            except Exception as e:
+                display(f"Error: {e}", target="output")
+
+        # 4. Connect the button
+        document.getElementById("run-btn").onclick = run_code
+    </script>
+</body>
+</html>
